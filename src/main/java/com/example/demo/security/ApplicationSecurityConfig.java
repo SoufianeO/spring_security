@@ -28,6 +28,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/","index","/css/*","/js/*")
                 .permitAll()
@@ -51,11 +52,19 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .username("linda")
                 .password(passwordEncoder.encode("pass123"))
                 .roles(ApplicationUserRole.ADMIN.name())
-                .build();        
+                .build();
+
+        UserDetails tom = User.builder()
+                .username("tom")
+                .password(passwordEncoder.encode("pass123"))
+                .roles(ApplicationUserRole.ADMINTRAINEE.name())
+                .build();
 
             return new InMemoryUserDetailsManager(
-                soufiane,
-                linda
+                    soufiane,
+                    linda,
+                    tom
+
             );
     }
 }

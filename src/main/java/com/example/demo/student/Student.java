@@ -17,5 +17,11 @@ public class Student {
         return studentName;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId=" + studentId +
+                ", studentName='" + studentName + '\'' +
+                '}';
+    }
 }
