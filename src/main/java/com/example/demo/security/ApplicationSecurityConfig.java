@@ -32,7 +32,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/","index","/css/*","/js/*").permitAll()
-                .antMatchers("/api/**").hasRole(STUDENT.name())
+                .antMatchers("/api/**").hasRole(STUDENT.name())//Order is important because antMatchers are executed one by one, like a switch case method
                 .antMatchers(HttpMethod.DELETE,"/management/api/**").hasAuthority(ApplicationUserPermission.COURSE_WRITE.getPermission())
                 .antMatchers(HttpMethod.POST,"/management/api/**").hasAuthority(ApplicationUserPermission.COURSE_WRITE.getPermission())
                 .antMatchers(HttpMethod.PUT,"/management/api/**").hasAuthority(ApplicationUserPermission.COURSE_WRITE.getPermission())
